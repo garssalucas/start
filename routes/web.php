@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Teste\SupportController;
+use App\Http\Controllers\Teste\TesteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/teste', [TesteController::class, 'teste']);
+
+Route::get('/supports', [SupportController::class, 'index'])->name('supports.index');
