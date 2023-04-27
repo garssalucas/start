@@ -14,12 +14,21 @@ class SupportController extends Controller
 {
     public function __construct(
         protected SupportService $service
-    ) {}
+    ) {
+    }
 
     public function index(Request $request)
     {
-        $supports = $this->service->getAll($request->filter);
-        return view('admin.supports.index', compact('supports'));
+        $supports = $this->service->paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 1),
+            filter: $request->filter
+
+        );
+
+        $filters = ['filter' => $request->get('filter', '')];
+
+        return view('admin.supports.index', compact('supports', 'filters'));
     }
 
     public function create()
@@ -38,7 +47,7 @@ class SupportController extends Controller
 
     public function show(string $id)
     {
-        if(!$support = $this->service->findOne($id)) {
+        if (!$support = $this->service->findOne($id)) {
             return back();
         }
 
@@ -47,7 +56,7 @@ class SupportController extends Controller
 
     public function edit(string $id)
     {
-        if(!$support = $this->service->findOne($id)) {
+        if (!$support = $this->service->findOne($id)) {
             return back();
         }
 
@@ -60,7 +69,7 @@ class SupportController extends Controller
             UpdateSupportDTO::makefromRequest($request)
         );
 
-        if(!$support) {
+        if (!$support) {
             return back();
         }
 
@@ -73,6 +82,4 @@ class SupportController extends Controller
 
         return redirect()->route('supports.index');
     }
-
-
 }
