@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Teste;
+namespace App\Http\Controllers\Admin;
 
 class TesteController
 {
     public function teste()
     {
-        return view('Teste.start');
+        return view('admin.start');
     }
 }

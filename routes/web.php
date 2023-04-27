@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Teste\SupportController;
-use App\Http\Controllers\Teste\TesteController;
+use App\Http\Controllers\Admin\SupportController;
+use App\Http\Controllers\Admin\TesteController;
 use Illuminate\Support\Facades\Route;
 
 /*
